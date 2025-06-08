@@ -3,8 +3,18 @@ const Joi = require('@hapi/joi');
 const config = require('./config/server');
 const userRoutes = require('./routes/user');
 const uploadCvRoute = require('./routes/upload');
+const { sequelize } = require('./models');
 
 const init = async () => {
+  // Cek koneksi ke database
+  try {
+    await sequelize.authenticate();
+    console.log('Koneksi ke database berhasil!');
+  } catch (err) {
+    console.error('Gagal koneksi ke database:', err);
+    process.exit(1);
+  }
+
   const server = Hapi.server({
     host: config.host,
     port: config.port,
@@ -45,6 +55,13 @@ const init = async () => {
         timestamp: new Date().toISOString()
       }).code(200);
     },
+  });
+
+  // Logging setiap ada request masuk
+  server.ext('onRequest', (request, h) => {
+    const now = new Date().toISOString();
+    console.log(`[${now}] Incoming request: ${request.method.toUpperCase()} ${request.path}`);
+    return h.continue;
   });
 
   // Error handling
