@@ -1,8 +1,6 @@
 require('dotenv').config();
 
-const config = {
-  host: process.env.HOST || 'localhost',
-  port: process.env.PORT || 5000,
-};
-
-module.exports = config; 
+module.exports = {
+  host: process.env.HOST || '0.0.0.0',
+  port: process.env.PORT || 9000
+}; 

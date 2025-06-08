@@ -7,7 +7,7 @@ const uploadCvRoute = require('./routes/upload');
 const init = async () => {
   const server = Hapi.server({
     host: config.host,
-    port: 5000,
+    port: config.port,
     routes: {
       cors: {
         origin: ['*'],
@@ -30,6 +30,19 @@ const init = async () => {
       return h.response({
         status: 'success',
         message: 'Server berjalan dengan baik!',
+      }).code(200);
+    },
+  });
+
+  // Endpoint health check
+  server.route({
+    method: 'GET',
+    path: '/health',
+    handler: (request, h) => {
+      return h.response({
+        status: 'success',
+        message: 'Server is healthy',
+        timestamp: new Date().toISOString()
       }).code(200);
     },
   });
