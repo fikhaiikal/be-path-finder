@@ -6,8 +6,8 @@ const axios = require('axios');
 const FormData = require('form-data');
 
 const SERPAPI_KEY = process.env.SERPAPI_KEY || 'YOUR_SERPAPI_KEY';
-const ML_API_URL = process.env.ML_API_URL || 'http://172.20.10.11:8000/process-resume';
-const REVIEW_API_URL = process.env.REVIEW_API_URL || 'http://172.20.10.11:8000/review';
+const ML_API_URL = process.env.ML_API_URL || 'http://localhost:8081/process-resume';
+const REVIEW_API_URL = process.env.REVIEW_API_URL || 'http://localhost:8081/review';
 
 const searchJobs = (query) => {
   return new Promise((resolve, reject) => {

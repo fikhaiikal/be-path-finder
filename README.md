@@ -324,5 +324,3 @@ be-pathfinder/
 ## 📄 License
 
 This project is licensed under the ISC License.
-
-**Made with ❤️ for better job matching experience** 
